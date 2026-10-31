@@ -25,7 +25,7 @@ async function bootstrap() {
     }),
   );
 
-  const port = Number(config.get<string>('PORT') ?? 3000);
+  const port = Number(process.env.PORT ?? config.get<string>('PORT') ?? 3000);
   await app.listen(port);
   console.log(`API de Punto Café en http://localhost:${port}`);
 }

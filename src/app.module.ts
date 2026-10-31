@@ -14,11 +14,18 @@ import { UsersModule } from './users/users.module';
     MongooseModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
-      useFactory: (config: ConfigService) => ({
-        uri:
+      useFactory: (config: ConfigService) => {
+        const uri =
           config.get<string>('MONGODB_URI') ??
-          'mongodb://localhost:27017/cafeteria',
-      }),
+          (process.env.VERCEL ? undefined : 'mongodb://localhost:27017/cafeteria');
+        if (!uri) {
+          throw new Error('Falta MONGODB_URI en las variables de entorno de Vercel');
+        }
+        return {
+          uri,
+          serverSelectionTimeoutMS: 5000,
+        };
+      },
     }),
     UsersModule,
     AuthModule,
