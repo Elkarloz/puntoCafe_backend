@@ -5,6 +5,7 @@ import { AuthModule } from './auth/auth.module';
 import { ExpensesModule } from './expenses/expenses.module';
 import { ProductsModule } from './products/products.module';
 import { SalesModule } from './sales/sales.module';
+import { StatusController } from './status.controller';
 import { UsersModule } from './users/users.module';
 
 @Module({
@@ -25,5 +26,6 @@ import { UsersModule } from './users/users.module';
     SalesModule,
     ExpensesModule,
   ],
+  controllers: [StatusController],
 })
 export class AppModule {}
