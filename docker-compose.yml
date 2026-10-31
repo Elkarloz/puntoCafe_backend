@@ -1,18 +1,4 @@
 services:
-  mongo:
-    image: mongo:7
-    restart: unless-stopped
-    ports:
-      - '27017:27017'
-    volumes:
-      - mongo_data:/data/db
-    healthcheck:
-      test: ['CMD', 'mongosh', '--eval', "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 20s
-
   api:
     build: .
     restart: unless-stopped
@@ -20,16 +6,10 @@ services:
       - '2028:2028'
     environment:
       PORT: 2028
-      MONGODB_URI: mongodb://mongo:27017/cafeteria
+      MONGODB_URI: ${MONGODB_URI}
       FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:5173}
       JWT_SECRET: ${JWT_SECRET:-cambia-este-secreto}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-604800}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-luzdary@gmail.com}
       ADMIN_PASSWORD: ${ADMIN_PASSWORD:-40769183}
       ADMIN_NOMBRE: ${ADMIN_NOMBRE:-Luz Dary}
-    depends_on:
-      mongo:
-        condition: service_healthy
-
-volumes:
-  mongo_data:
