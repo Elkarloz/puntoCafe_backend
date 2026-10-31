@@ -17,9 +17,9 @@ services:
     build: .
     restart: unless-stopped
     ports:
-      - '2027:2027'
+      - '2028:2028'
     environment:
-      PORT: 2027
+      PORT: 2028
       MONGODB_URI: mongodb://mongo:27017/cafeteria
       FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:5173}
       JWT_SECRET: ${JWT_SECRET:-cambia-este-secreto}

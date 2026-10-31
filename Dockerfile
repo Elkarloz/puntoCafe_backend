@@ -15,6 +15,6 @@ ENV NODE_ENV=production
 COPY --from=build /app/package.json ./
 COPY --from=build /app/node_modules ./node_modules
 COPY --from=build /app/dist ./dist
-ENV PORT=2027
-EXPOSE 2027
+ENV PORT=2028
+EXPOSE 2028
 CMD ["node", "dist/main.js"]
