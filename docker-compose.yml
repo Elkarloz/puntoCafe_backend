@@ -9,7 +9,7 @@ services:
     environment:
       PORT: 2028
       MONGODB_URI: mongodb://mongo:ocbriwkbvd71oqfb@host.docker.internal:27017/puntoCafe?authSource=admin&directConnection=true
-      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:5173}
+      FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-https://punto-cafe-frontend.vercel.app}
       JWT_SECRET: ${JWT_SECRET:-cambia-este-secreto}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-604800}
       ADMIN_EMAIL: ${ADMIN_EMAIL:-luzdary@gmail.com}

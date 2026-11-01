@@ -10,9 +10,17 @@ async function bootstrap() {
   app.use(urlencoded({ extended: true, limit: '2mb' }));
   const config = app.get(ConfigService);
 
-  const origin = config.get<string>('FRONTEND_ORIGIN') ?? 'http://localhost:5173';
+  const extraOrigins = (config.get<string>('FRONTEND_ORIGIN') ?? '')
+    .split(',')
+    .map((item) => item.trim())
+    .filter(Boolean);
+  const origins = [
+    'http://localhost:5173',
+    'https://punto-cafe-frontend.vercel.app',
+    ...extraOrigins,
+  ];
   app.enableCors({
-    origin,
+    origin: origins,
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization'],
   });
