@@ -6,7 +6,7 @@ services:
       - '2028:2028'
     environment:
       PORT: 2028
-      MONGODB_URI: ${MONGODB_URI}
+      MONGODB_URI: mongodb://mongo:ocbriwkbvd71oqfb@172.20.0.2:27017/puntoCafe?authSource=admin&directConnection=true
       FRONTEND_ORIGIN: ${FRONTEND_ORIGIN:-http://localhost:5173}
       JWT_SECRET: ${JWT_SECRET:-cambia-este-secreto}
       JWT_EXPIRES_IN: ${JWT_EXPIRES_IN:-604800}
