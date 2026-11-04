@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer';
-import { IsDateString, IsIn, IsInt, IsOptional, IsString, Min, MinLength } from 'class-validator';
+import { Transform, Type } from 'class-transformer';
+import { IsDateString, IsIn, IsInt, IsOptional, IsString, Min, MinLength, ValidateIf } from 'class-validator';
 import { PRODUCT_CATEGORIES, PRODUCT_PACKAGES, PRODUCT_SIZES } from '../product.schema';
 
 export class ProductDto {
@@ -23,6 +23,8 @@ export class ProductDto {
   envase?: '' | (typeof PRODUCT_PACKAGES)[number];
 
   @IsOptional()
+  @Transform(({ value }) => (typeof value === 'string' && value.trim() === '' ? undefined : value))
+  @ValidateIf((_, value) => value != null && value !== '')
   @IsDateString({}, { message: 'La fecha de vencimiento no es válida' })
   fechaVencimiento?: string;
 
